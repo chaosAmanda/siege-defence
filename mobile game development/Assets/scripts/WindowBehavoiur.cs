@@ -8,6 +8,7 @@ public class WindowBehavoiur : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         Cam.GetComponent<CameraScript>().newWindow(this.gameObject);
     }
 
