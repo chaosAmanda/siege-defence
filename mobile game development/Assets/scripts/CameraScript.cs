@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.WSA;
+using Unity.VisualScripting;
 
 public class CameraScript : MonoBehaviour
 {
@@ -22,7 +24,7 @@ public class CameraScript : MonoBehaviour
     private float _pitch = 0.0f;
 
     public bool menu = false;
-    [SerializeField] GameObject window;
+    [SerializeField] List<GameObject> windows;
     
 
     public void HandleInput()
@@ -71,6 +73,11 @@ public class CameraScript : MonoBehaviour
 
     //end of tutorial code
 
+    public void newWindow(GameObject window)
+    {
+        windows.Add(window);
+    }
+
 
 // Update is called once per frame
 void Update()
@@ -99,12 +106,20 @@ void Update()
 
             if (Input.GetMouseButtonDown(0))
             {
-                if (window == GetClickedObject(out RaycastHit hit))
+                foreach (GameObject window in windows)
                 {
-                    menu = true;
-                    GameManager.GetComponent<GameManager>().window(window);
+                    if (window != null)
+                    {
+
+                        if (window == GetClickedObject(out RaycastHit hit))
+                        {
+                            menu = true;
+                            GameManager.GetComponent<GameManager>().window(window);
+                        }
+                    }
                 }
             }
+
         }
 
 

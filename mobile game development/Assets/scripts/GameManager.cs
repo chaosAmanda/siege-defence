@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject mainCam;
 
-    private GameObject ActiveWindow;
+    public GameObject ActiveWindow;
 
     public void GainMoney(int bounty)
     {
@@ -24,8 +24,10 @@ public class GameManager : MonoBehaviour
 
     public void window(GameObject activewindow)
     {
+
         ActiveWindow = activewindow;
         BuyDefense.SetActive(true);
+
     }
 
     public void createDefender(GameObject selection)
