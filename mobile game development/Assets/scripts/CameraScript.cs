@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.WSA;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager.UI;
+using UnityEngine.UIElements;
 
 public class CameraScript : MonoBehaviour
 {
@@ -24,7 +26,10 @@ public class CameraScript : MonoBehaviour
     private float _pitch = 0.0f;
 
     public bool menu = false;
+    public GameObject TouchTarget;
     [SerializeField] List<GameObject> windows;
+
+    private Ray ray;
     
 
     public void HandleInput()
@@ -54,12 +59,25 @@ public class CameraScript : MonoBehaviour
     GameObject GetClickedObject(out RaycastHit hit)
     {
         GameObject target = null;
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray.origin, ray.direction * 10, out hit))
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit[] hits = Physics.RaycastAll(ray, 10);
+        hit = default;
+        /*if (Physics.Raycast(ray.origin, ray.direction * 10, out hit))
         {
             Debug.Log(hit.collider.gameObject.tag);
             if (!isPointerOverUIObject()) { target = hit.collider.gameObject; }
+        }*/
+        foreach (RaycastHit hitOb in hits)
+        {
+            //Debug.Log(hitOb.collider.gameObject.tag);
+            if (hitOb.collider.isTrigger)
+            {
+                if (!isPointerOverUIObject()) { target = hitOb.collider.gameObject; }
+                Debug.Log("hit trigger");
+                return target;
+            }
         }
+
         return target;
     }
     private bool isPointerOverUIObject()
@@ -106,7 +124,7 @@ void Update()
 
             if (Input.GetMouseButtonDown(0))
             {
-                foreach (GameObject window in windows)
+                /*foreach (GameObject window in windows)
                 {
                     if (window != null)
                     {
@@ -117,6 +135,19 @@ void Update()
                             GameManager.GetComponent<GameManager>().window(window);
                         }
                     }
+                }*/
+                TouchTarget = GetClickedObject(out RaycastHit hit);
+                if (TouchTarget != null)
+                {
+                    if (TouchTarget.tag == "window")
+                    {
+                        menu = true;
+                        GameManager.GetComponent<GameManager>().window(TouchTarget);
+                    }
+                    else if (TouchTarget.tag == "defender")
+                    {
+
+                    }
                 }
             }
 
@@ -125,5 +156,9 @@ void Update()
 
 
         //RotateCamera(yawRotation);
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(ray.origin, ray.origin + (ray.direction*10f));
     }
 }

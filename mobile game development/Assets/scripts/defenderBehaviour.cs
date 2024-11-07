@@ -15,7 +15,6 @@ public class defenderBehaviour : MonoBehaviour
     {
         if (coll.tag == "Enemy")
         {
-            Debug.Log("attacking");
             if (wait <= 0.0f)
             {
                 attack(coll.gameObject);
