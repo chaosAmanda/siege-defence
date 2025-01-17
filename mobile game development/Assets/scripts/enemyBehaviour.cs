@@ -27,11 +27,13 @@ public class enemyBehaviour : MonoBehaviour
         if (killed) { 
             Destroy(gameObject);
             Manager.GetComponent<GameManager>().GainMoney(bounty);
+            Manager.GetComponent<GameManager>().GainScore(bounty);
         }
         else if (!killed)
         {
             Destroy(gameObject);
             Manager.GetComponent<GameManager>().LoseHealth();
+            Handheld.Vibrate();
         }
     }
 

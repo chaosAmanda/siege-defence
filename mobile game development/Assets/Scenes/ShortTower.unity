@@ -496,7 +496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2
   enemy: {fileID: 1116101264334677055, guid: c2967a121e259f14c9cebe2f86590555, type: 3}
-  cooldown: 10
+  cooldown: 5
   Manager: {fileID: 347576269}
   TowerBase: -4.3
 --- !u!1 &284163996
@@ -735,6 +735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   money: 50
   lives: 20
+  score: 0
   MoneyUI: {fileID: 1916640923}
   LivesUI: {fileID: 1680786558}
   RoundsUI: {fileID: 0}

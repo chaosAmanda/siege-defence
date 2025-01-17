@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public int money = 0;
     public int lives = 10;
 
-    private int score = 500;
+    public int score = 0;
 
     [SerializeField] private TMP_Text MoneyUI;
     [SerializeField] private TMP_Text LivesUI;
@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject mainCam;
 
     public GameObject ActiveWindow;
+
+    private bool gmover = false;
 
     public void GainMoney(int bounty)
     {
@@ -66,14 +68,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoneyUI.text = money.ToString();
-        LivesUI.text = lives.ToString();
-        if (lives <= 0) 
-        { 
-            scoreUI.text = "Game Over\n" +
-                "Score:\n" +
-                score.ToString();
-            GameOver.SetActive(true);
+        if (!gmover)
+        {
+            MoneyUI.text = money.ToString();
+            LivesUI.text = lives.ToString();
+            if (lives <= 0)
+            {
+                scoreUI.text = "Game Over\n" +
+                    "Score:\n" +
+                    score.ToString();
+                GameOver.SetActive(true);
+                gmover = true;
+            }
         }
     }
 }
