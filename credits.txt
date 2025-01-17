@@ -1,3 +1,3 @@
-https://www.texturecan.com/details/569/
-https://penzilla.itch.io/basic-gui-bundle
-https://www.youtube.com/watch?v=pfkQDGhd8_A&t=30s&ab_channel=XSGames%F0%9F%8C%80FrankEno
+https://www.texturecan.com/details/569/ (UI Assets)
+https://penzilla.itch.io/basic-gui-bundle (UI Assets)
+https://www.youtube.com/watch?v=pfkQDGhd8_A&t=30s&ab_channel=XSGames%F0%9F%8C%80FrankEno (Tutorial Code for Input)
