@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using UnityEngine.WSA;
+//using UnityEngine.WSA;
 using Unity.VisualScripting;
-using UnityEditor.PackageManager.UI;
+//using UnityEditor.PackageManager.UI;
 using UnityEngine.UIElements;
 
 public class CameraScript : MonoBehaviour
@@ -56,17 +56,16 @@ public class CameraScript : MonoBehaviour
 
 
     //tutorial code: https://www.youtube.com/watch?v=pfkQDGhd8_A&t=30s&ab_channel=XSGames%F0%9F%8C%80FrankEno
+    //code modified to use raycastAll isnstead of raycast
+    //this returns an array of all hits rather than the fist object hit by the ray
+    //the colliders are then checked for isTrigger == True, which
+    //prevents the ray interacting with other colliders, such as the attack collider of the basic defender 
     GameObject GetClickedObject(out RaycastHit hit)
     {
         GameObject target = null;
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] hits = Physics.RaycastAll(ray, 10);
         hit = default;
-        /*if (Physics.Raycast(ray.origin, ray.direction * 10, out hit))
-        {
-            Debug.Log(hit.collider.gameObject.tag);
-            if (!isPointerOverUIObject()) { target = hit.collider.gameObject; }
-        }*/
         foreach (RaycastHit hitOb in hits)
         {
             //Debug.Log(hitOb.collider.gameObject.tag);

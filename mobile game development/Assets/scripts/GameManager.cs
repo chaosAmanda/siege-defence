@@ -7,10 +7,17 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public int money = 0;
+    public int lives = 10;
+
+    private int score = 500;
 
     [SerializeField] private TMP_Text MoneyUI;
+    [SerializeField] private TMP_Text LivesUI;
+    [SerializeField] private TMP_Text RoundsUI;
+    [SerializeField] private TMP_Text scoreUI;
 
     [SerializeField] private GameObject BuyDefense;
+    [SerializeField] private GameObject GameOver;
 
     [SerializeField] private GameObject mainCam;
 
@@ -20,6 +27,15 @@ public class GameManager : MonoBehaviour
     {
         money += bounty;
         MoneyUI.text = money.ToString();
+    }
+    public void GainScore(int bounty)
+    {
+        score += bounty;
+    }
+
+    public void LoseHealth()
+    {
+        lives -= 1;
     }
 
     public void window(GameObject activewindow)
@@ -43,6 +59,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         MoneyUI.text = money.ToString();
+        LivesUI.text = lives.ToString();
         BuyDefense.SetActive(false);
     }
 
@@ -50,5 +67,13 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         MoneyUI.text = money.ToString();
+        LivesUI.text = lives.ToString();
+        if (lives <= 0) 
+        { 
+            scoreUI.text = "Game Over\n" +
+                "Score:\n" +
+                score.ToString();
+            GameOver.SetActive(true);
+        }
     }
 }

@@ -17,6 +17,8 @@ public class enemySpawner : MonoBehaviour
 
     public float TowerBase;
 
+    private int spawncount = 0;
+
     void NewSpawn()
     {
         float spawnX = Random.Range(-radius, radius);
@@ -30,21 +32,33 @@ public class enemySpawner : MonoBehaviour
 
         GameObject newEnemy = Instantiate(enemy, new Vector3(spawnX, TowerBase, spawnZ), Quaternion.identity);
         newEnemy.GetComponent<enemyBehaviour>().Manager = Manager;
+        spawncount++;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        NewSpawn();
-        cooldown = Random.Range(3,5);
     }
 
     // Update is called once per frame
     void Update()
     {
         if (cooldown <= 0) {
-            NewSpawn();
-            cooldown = Random.Range(3, 5);
+            if (spawncount <= 10)
+            {
+                NewSpawn();
+                cooldown = Random.Range(3, 5);
+            }
+            else if (spawncount <= 20) 
+            {
+                NewSpawn();
+                cooldown = Random.Range(2, 4);
+            }
+            else
+            {
+                NewSpawn();
+                cooldown = Random.Range(1, 2);
+            }
         }
 
         cooldown -= Time.deltaTime; 

@@ -122,6 +122,7 @@ MonoBehaviour:
   health: 10
   speed: 2
   bounty: 10
+  targetheight: 13.5
   Manager: {fileID: 0}
 --- !u!54 &-4335412112249607929
 Rigidbody:

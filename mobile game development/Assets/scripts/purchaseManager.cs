@@ -14,6 +14,8 @@ public class purchaseManager : MonoBehaviour
 
     [SerializeField] private GameObject[] Defenders;
 
+    [SerializeField] private GameObject mainCam;
+
     public int activeOption = 0;
 
     // Start is called before the first frame update
@@ -29,6 +31,11 @@ public class purchaseManager : MonoBehaviour
             BuyDefense.SetActive(false);
             GameManager.GetComponent<GameManager>().createDefender(Defenders[activeOption]);
         }
+    }
+    public void close()
+    {
+        BuyDefense.SetActive(false);
+        mainCam.GetComponent<CameraScript>().menu = false;
     }
 
     // Update is called once per frame

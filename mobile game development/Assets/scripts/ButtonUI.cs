@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 public class ButtonUI : MonoBehaviour
 {
 
-    public void purchase()
+    public void startGame()
     {
-        
-        gameObject.SetActive(false);
+        SceneManager.LoadScene(1);
     }
-
+    public void endGame()
+    {
+        SceneManager.LoadScene(0);
+    }
 
 }

@@ -7,6 +7,7 @@ public class enemyBehaviour : MonoBehaviour
     public int health = 10;
     public float speed = 2;
     public int bounty = 10;
+    public float targetheight = 4.5f;
 
     public GameObject Manager;
 
@@ -30,6 +31,7 @@ public class enemyBehaviour : MonoBehaviour
         else if (!killed)
         {
             Destroy(gameObject);
+            Manager.GetComponent<GameManager>().LoseHealth();
         }
     }
 
@@ -37,7 +39,7 @@ public class enemyBehaviour : MonoBehaviour
     void Update()
     {
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + (speed * Time.deltaTime), this.transform.position.z);
-        if (this.transform.position.y > 4.5)
+        if (this.transform.position.y > targetheight)
         {
             death(false);
         }
